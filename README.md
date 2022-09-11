@@ -1,4 +1,4 @@
-# odin-recipes
-odin project project
-
-This is the first project I'm building with Odin project.
+# Rock, Paper, Scissors
+What I learned in this project:
+- Set up repo at start of project
+- Where to place javascript file
