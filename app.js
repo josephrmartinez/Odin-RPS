@@ -6,21 +6,23 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
+// REPLACED BY EVENT LISTENER
+// function getPlayerChoice() {
+//     let playerSelection = prompt("Enter rock, paper, or scissors: ").toLowerCase();
+//     if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
+//         return playerSelection;
+//     } else {
+//         playerSelection = ""
+//         alert("Please enter only rock, paper, or scissors.")
+//         getPlayerChoice()
+//     }
+// }
 
-function getPlayerChoice() {
-    let playerSelection = prompt("Enter rock, paper, or scissors: ").toLowerCase();
-    if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
-        return playerSelection;
-    } else {
-        playerSelection = ""
-        alert("Please enter only rock, paper, or scissors.")
-        getPlayerChoice()
-    }
-}
-
-function playRound() {
-    let playerChoice = getPlayerChoice();
+function playRound(playerChoice) {
+    // let playerChoice = getPlayerChoice();
     let computerChoice = getComputerChoice();
+    console.log(playerChoice)
+    console.log(computerChoice)
     if (playerChoice == computerChoice) {
         console.log("Game is a tie!");
     } else if (playerChoice == "rock" && computerChoice == "paper") {
@@ -45,21 +47,24 @@ function playRound() {
 }
 
 
-function game(){
-    for (let i = 0; i < 5; i++){
-        playRound()
-        console.log("Player score: " + playerScore)
-        console.log("Computer score: " + computerScore)
-    }
-    if (playerScore == computerScore) {
-        console.log("It is a tie! Play again!")
-    } else if (playerScore > computerScore) {
-        console.log("You win!");
-    } else {
-        console.log("Computer wins!")
-    }
-    playerScore = 0;
-    computerScore = 0;
-}
+// function game(){
+//     // for (let i = 0; i < 5; i++){
+//     //     playRound()
+//     //     console.log("Player score: " + playerScore)
+//     //     console.log("Computer score: " + computerScore)
+//     // }
+//     if (playerScore == computerScore) {
+//         console.log("It is a tie! Play again!")
+//     } else if (playerScore > computerScore) {
+//         console.log("You win!");
+//     } else {
+//         console.log("Computer wins!")
+//     }
+//     playerScore = 0;
+//     computerScore = 0;
+// }
 
-game()
+
+
+const rockButton = document.getElementById('rock');
+rockButton.addEventListener('click', playRound)
