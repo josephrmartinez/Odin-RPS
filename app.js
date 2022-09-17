@@ -1,51 +1,50 @@
+// GAME
+
 let playerScore = 0;
 let computerScore = 0;
+let playerSelection = "";
+let computerChoice = "";
 
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-// REPLACED BY EVENT LISTENER
-// function getPlayerChoice() {
-//     let playerSelection = prompt("Enter rock, paper, or scissors: ").toLowerCase();
-//     if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
-//         return playerSelection;
-//     } else {
-//         playerSelection = ""
-//         alert("Please enter only rock, paper, or scissors.")
-//         getPlayerChoice()
-//     }
-// }
 
-function playRound(playerChoice) {
-    // let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
-    console.log(playerChoice)
-    console.log(computerChoice)
-    if (playerChoice == computerChoice) {
-        console.log("Game is a tie!");
-    } else if (playerChoice == "rock" && computerChoice == "paper") {
+function playRound(playerSelection, computerChoice) {
+    if (playerSelection == computerChoice) {
+        return "Game is a tie!";
+    } else if (playerSelection == "rock" && computerChoice == "paper") {
         computerScore += 1;
-        console.log("Paper beats rock. Computer wins!");
-    } else if (playerChoice == "rock" && computerChoice == "scissors") {
+        updateScore();
+        return "Paper beats rock. Computer wins!";
+    } else if (playerSelection == "rock" && computerChoice == "scissors") {
         playerScore += 1;
-        console.log("Rock beats scissors. You win!");
-    } else if (playerChoice == "paper" && computerChoice == "scissors") {
+        updateScore();
+        return "Rock beats scissors. You win!";
+    } else if (playerSelection == "paper" && computerChoice == "scissors") {
         computerScore += 1;
-        console.log("Scissors beats paper. Computer wins!");
-    } else if (playerChoice == "paper" && computerChoice == "rock") {
+        updateScore();
+        return "Scissors beats paper. Computer wins!";
+    } else if (playerSelection == "paper" && computerChoice == "rock") {
         playerScore += 1;
-        console.log("Paper beats rock. You win!");
-    } else if (playerChoice == "scissors" && computerChoice == "paper") {
+        updateScore();
+        return "Paper beats rock. You win!";
+    } else if (playerSelection == "scissors" && computerChoice == "paper") {
         playerScore += 1;
-        console.log("Scissors beats rock. You win!");
-    } else if (playerChoice == "scissors" && computerChoice == "rock") {
+        updateScore();
+        return "Scissors beats rock. You win!";
+    } else if (playerSelection == "scissors" && computerChoice == "rock") {
         computerScore += 1;
-        console.log("Rock beats scissors. Computer wins!");
-    }
+        updateScore();
+        return "Rock beats scissors. Computer wins!";
+    } 
 }
 
+function updateScore() {
+    compScore.textContent = computerScore;
+    playScore.textContent = playerScore;
+}
 
 // function game(){
 //     // for (let i = 0; i < 5; i++){
@@ -64,7 +63,42 @@ function playRound(playerChoice) {
 //     computerScore = 0;
 // }
 
-
+// UI
 
 const rockButton = document.getElementById('rock');
-rockButton.addEventListener('click', playRound)
+const paperButton = document.getElementById('paper');
+const scissorsButton = document.getElementById('scissors');
+const gameText = document.getElementById('gameText');
+const compScore = document.getElementById('compScore');
+const playScore = document.getElementById('playScore');
+
+
+rockButton.addEventListener('click', () => handleClick('rock'))
+paperButton.addEventListener('click', () => handleClick('paper'))
+scissorsButton.addEventListener('click', () => handleClick('scissors'))
+
+function handleClick(playerSelection) {
+    let computerChoice = getComputerChoice()
+    setTimeout(() => {
+        gameText.textContent = `You selected ${playerSelection}`
+    }, 200);
+    setTimeout(() => {
+        gameText.textContent = `The computer selected ${computerChoice}`
+    }, 1200);
+    setTimeout(() => {
+        gameText.textContent = playRound(playerSelection, computerChoice)
+    }, 2200);
+    setTimeout(() => {
+        if (computerScore === 5) {
+            gameText.textContent = "Game over! Computer wins!";
+        } else if (playerScore === 5) {
+            gameText.textContent = "Game over! You win!";
+        } else {
+            gameText.textContent = "Select rock, paper, or scissors:"
+        };
+    }, 3200);
+    
+}
+
+// TODO:
+// prompt with playagain; restart game
